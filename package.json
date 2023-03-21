@@ -1,11 +1,11 @@
 {
-  "name": "zadanie8",
+  "name": "parcel-project-template",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://cragherk.github.io/zadanie8/",
+  "homepage": "https://goitacademy.github.io/parcel-project-template",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /zadanie8/"
+    "build": "parcel build src/*.html --public-url /parcel-project-template/"
   },
   "repository": {
     "type": "git",
