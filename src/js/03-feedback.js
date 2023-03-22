@@ -27,6 +27,5 @@ form.addEventListener('submit', event => {
   );
   localStorage.removeItem('feedback-form-state');
   emailInput.value = '';
-  messageInput.value '';
-  
+  messageInput.value = '';
 });
