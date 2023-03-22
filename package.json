@@ -9,13 +9,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://cragherk.github.io/zadanie8/src/index.html"
+    "url": "git+https://github.com/goitacademy/parcel-project-template.git"
   },
   "keywords": [],
   "author": "michal backi",
   "license": "ISC",
   "bugs": {
-    "url": "https://cragherk.github.io/zadanie8/src/index.html/issues"
+    "url": "https://github.com/goitacademy/parcel-project-template/issues"
   },
   "dependencies": {
     "modern-normalize": "^1.1.0"
