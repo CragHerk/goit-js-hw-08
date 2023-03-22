@@ -5,50 +5,30 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 // Change code below this line
-const galleryContainer = document.querySelector('.gallery');
+const createItem = (item) => {
+  return `
+      <a class="gallery__item" href="${item.original}" data-autoshow="false">
+        <img 
+          class="gallery__image" 
+          src="${item.preview}"
+          data-source="${item.original}"
+          alt="${item.description}"
+        />
+      </a>
+  `
+}
 
-const createGalleryItem = item => {
-  const galleryItem = document.createElement('div');
-  galleryItem.classList.add('gallery__item');
+const items = galleryItems.map(item =>
+  createItem(item)).join("");
+gallery.innerHTML = items;
 
-  const link = document.createElement('a');
-  link.classList.add('gallery__link');
-  link.href = item.original;
-  link.setAttribute('data-lightbox', 'gallery');
-  link.classList.add('lightbox');
+let lightbox = new SimpleLightbox(`.gallery a`, {
+  captionDelay: 250,
+  captionsData: 'alt',
+  overlayOpacity: 0.7
+})
 
-  const image = document.createElement('img');
-  image.classList.add('gallery__image');
-  image.classList.add('img-fluid');
-  image.src = item.preview;
-  image.dataset.source = item.original;
-  image.alt = item.description;
-
-  link.appendChild(image);
-  galleryItem.appendChild(link);
-
-  return galleryItem;
-};
-
-const renderGallery = items => {
-  const galleryItems = items.map(item => createGalleryItem(item));
-  galleryContainer.append(...galleryItems);
-
-  const lightbox = new SimpleLightbox('.lightbox', {
-    captions: true,
-    captionsData: 'alt',
-    captionDelay: 250,
-    close: true,
-    closeText: '×',
-    nav: true,
-    scrollZoom: false,
-    history: false,
-    keyboard: true,
-  });
-  galleryContainer.addEventListener('click', event => {
-    event.preventDefault();
-    lightbox.open();
-  });
-};
-console.log(galleryItems);
-renderGallery(galleryItems);
+gallery.addEventListener('click', (event) => {
+  event.preventDefault();
+  lightbox.loadImage()
+})
