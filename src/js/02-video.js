@@ -6,23 +6,12 @@ const player = new Player(iframe);
 
 const currentTime = localStorage.getItem('videoplayer-current-time');
 if (currentTime) {
-  const parsedTime = parseInt(currentTime, 10); // parsujemy string do liczby
-  if (parsedTime >= 0 && parsedTime < player.duration) {
-    // sprawdzamy czy czas jest poprawny
-    player.setCurrentTime(parsedTime);
-  }
+  player.setCurrentTime(currentTime);
 }
 
 player.on(
   'timeupdate',
-  throttle(() => {
-    const currentTime = Math.round(player.currentTime);
-    if (
-      !isNaN(currentTime) &&
-      currentTime >= 0 &&
-      currentTime <= player.duration
-    ) {
-      localStorage.setItem('videoplayer-current-time', currentTime);
-    }
+  throttle(function (data) {
+    localStorage.setItem('videoplayer-current-time', data.seconds);
   }, 1000)
 );
