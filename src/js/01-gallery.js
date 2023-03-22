@@ -1,8 +1,9 @@
 // Add imports above this line
-import SimpleLightbox from './simplelightbox';
+import { galleryItems } from './gallery-items';
+import SimpleLightbox from 'simplelightbox';
 // Dodatkowy import stylów
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import { galleryItems } from './gallery-items.js';
+
 // Change code below this line
 const galleryContainer = document.querySelector('.gallery');
 
