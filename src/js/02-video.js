@@ -1,10 +1,10 @@
-import Player from "@vimeo/player";
-import throttle from "lodash.throttle";
+import Player from './@vimeo/player';
+import throttle from './lodash.throttle';
 
-const iframe = document.querySelector("#vimeo-player");
+const iframe = document.querySelector('#vimeo-player');
 const player = new Player(iframe);
 
-const currentTime = localStorage.getItem("videoplayer-current-time");
+const currentTime = localStorage.getItem('videoplayer-current-time');
 if (currentTime) {
   const parsedTime = parseInt(currentTime, 10); // parsujemy string do liczby
   if (parsedTime >= 0 && parsedTime < player.duration) {
@@ -14,7 +14,7 @@ if (currentTime) {
 }
 
 player.on(
-  "timeupdate",
+  'timeupdate',
   throttle(() => {
     const currentTime = Math.round(player.currentTime);
     if (
@@ -22,7 +22,7 @@ player.on(
       currentTime >= 0 &&
       currentTime <= player.duration
     ) {
-      localStorage.setItem("videoplayer-current-time", currentTime);
+      localStorage.setItem('videoplayer-current-time', currentTime);
     }
   }, 1000)
 );
