@@ -1,2 +1,0 @@
-const e=document.querySelector("#vimeo-player"),t=new Vimeo.Player(e),r=localStorage.getItem("videoplayer-current-time");if(r){const e=parseInt(r,10);e>=0&&e<t.getDuration()&&t.setCurrentTime(e)}t.on("timeupdate",_.throttle((()=>{const e=Math.round(t.getCurrentTime());!isNaN(e)&&e>=0&&e<=t.getDuration()&&localStorage.setItem("videoplayer-current-time",e)}),1e3));
-//# sourceMappingURL=02-video.089157d7.js.map
