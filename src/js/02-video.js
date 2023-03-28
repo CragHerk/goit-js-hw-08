@@ -1,24 +1,17 @@
-const iframe = document.querySelector('#vimeo-player');
-const player = new Vimeo.Player(iframe);
+const player = new Vimeo.Player('vimeo-player');
+const timeUpdateThrottled = _.throttle(saveCurrentTime, 1000);
+const currentTimeKey = 'videoplayer-current-time';
 
-const currentTime = localStorage.getItem('videoplayer-current-time');
-if (currentTime) {
-  const parsedTime = parseInt(currentTime, 10);
-  if (parsedTime >= 0 && parsedTime < player.getDuration()) {
-    player.setCurrentTime(parsedTime);
-  }
+player.on('timeupdate', timeUpdateThrottled);
+
+function saveCurrentTime(event) {
+  const currentTime = event.seconds;
+  localStorage.setItem(currentTimeKey, currentTime);
 }
 
-player.on(
-  'timeupdate',
-  _.throttle(() => {
-    const currentTime = Math.round(player.getCurrentTime());
-    if (
-      !isNaN(currentTime) &&
-      currentTime >= 0 &&
-      currentTime <= player.getDuration()
-    ) {
-      localStorage.setItem('videoplayer-current-time', currentTime);
-    }
-  }, 1000)
-);
+player.getCurrentTime().then(time => {
+  const storedTime = localStorage.getItem(currentTimeKey);
+  if (storedTime !== null) {
+    player.setCurrentTime(storedTime);
+  }
+});
